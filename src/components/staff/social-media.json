@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_staff_social_media",
+  "info": {
+    "displayName": "Social Media",
+    "description": "Social media profiles for staff members"
+  },
+  "options": {},
+  "attributes": {
+    "linkedin": {
+      "type": "string"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "instagram": {
+      "type": "string"
+    },
+    "avvo": {
+      "type": "string"
+    },
+    "justia": {
+      "type": "string"
+    }
+  }
+}

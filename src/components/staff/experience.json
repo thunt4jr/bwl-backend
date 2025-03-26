@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_staff_experience",
+  "info": {
+    "displayName": "Experience",
+    "description": "Work experience for staff members"
+  },
+  "options": {},
+  "attributes": {
+    "position": {
+      "type": "string",
+      "required": true
+    },
+    "company": {
+      "type": "string",
+      "required": true
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "current": {
+      "type": "boolean",
+      "default": false
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_seo_seo_metadata",
+  "info": {
+    "displayName": "SEO Metadata",
+    "description": "Manage SEO metadata for content"
+  },
+  "options": {},
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "required": true,
+      "maxLength": 70
+    },
+    "metaDescription": {
+      "type": "text",
+      "required": true,
+      "maxLength": 160
+    },
+    "metaKeywords": {
+      "type": "text"
+    },
+    "metaRobots": {
+      "type": "string",
+      "default": "index, follow"
+    },
+    "structuredData": {
+      "type": "json"
+    },
+    "metaViewport": {
+      "type": "string",
+      "default": "width=device-width, initial-scale=1"
+    },
+    "canonicalURL": {
+      "type": "string"
+    }
+  }
+}

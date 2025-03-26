@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_staff_education",
+  "info": {
+    "displayName": "Education",
+    "description": "Educational background for staff members"
+  },
+  "options": {},
+  "attributes": {
+    "degree": {
+      "type": "string",
+      "required": true
+    },
+    "institution": {
+      "type": "string",
+      "required": true
+    },
+    "year": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "consultation_requests",
+  "info": {
+    "singularName": "consultation-request",
+    "pluralName": "consultation-requests",
+    "displayName": "Consultation Request",
+    "description": "Store and manage consultation requests"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "practiceArea": {
+      "type": "string",
+      "required": true
+    },
+    "preferredDate": {
+      "type": "date",
+      "required": true
+    },
+    "preferredTime": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["new", "scheduled", "completed", "cancelled", "no-show"],
+      "default": "new"
+    },
+    "scheduledTime": {
+      "type": "datetime"
+    },
+    "attorneyAssigned": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::staff-member.staff-member"
+    },
+    "notes": {
+      "type": "richtext"
+    },
+    "followUpDate": {
+      "type": "date"
+    },
+    "clientConvertedToCase": {
+      "type": "boolean",
+      "default": false
+    },
+    "ipAddress": {
+      "type": "string"
+    },
+    "userAgent": {
+      "type": "text"
+    },
+    "referrer": {
+      "type": "string"
+    }
+  }
+}
