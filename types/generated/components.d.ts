@@ -1,5 +1,34 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SeoAnalytics extends Struct.ComponentSchema {
+  collectionName: 'components_seo_analytics';
+  info: {
+    description: 'Web analytics and tracking configurations';
+    displayName: 'Analytics Integration';
+  };
+  attributes: {
+    conversionTracking: Schema.Attribute.Component<
+      'seo.conversion-event',
+      true
+    >;
+    cookieConsentRequired: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+    customDimensions: Schema.Attribute.Component<'seo.custom-dimension', true>;
+    enableDemographics: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    enableEnhancedMeasurement: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+    excludeFromAnalytics: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    facebookPixelID: Schema.Attribute.String;
+    googleAnalyticsID: Schema.Attribute.String;
+    googleTagManagerID: Schema.Attribute.String;
+    linkedInInsightTag: Schema.Attribute.String;
+    microsoftClarityID: Schema.Attribute.String;
+    useGTM: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface SeoBreadcrumb extends Struct.ComponentSchema {
   collectionName: 'components_seo_breadcrumb';
   info: {
@@ -17,6 +46,52 @@ export interface SeoBreadcrumb extends Struct.ComponentSchema {
       >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SeoConversionEvent extends Struct.ComponentSchema {
+  collectionName: 'components_seo_conversion_event';
+  info: {
+    description: 'Track specific conversion events';
+    displayName: 'Conversion Event';
+  };
+  attributes: {
+    customEventProperties: Schema.Attribute.JSON;
+    eventCategory: Schema.Attribute.Enumeration<
+      [
+        'contact',
+        'consultation',
+        'download',
+        'signup',
+        'call',
+        'video',
+        'custom',
+      ]
+    > &
+      Schema.Attribute.Required;
+    eventName: Schema.Attribute.String & Schema.Attribute.Required;
+    eventValue: Schema.Attribute.Decimal;
+    selector: Schema.Attribute.String;
+    triggerOn: Schema.Attribute.Enumeration<
+      ['click', 'submit', 'scroll', 'view', 'timer']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'click'>;
+  };
+}
+
+export interface SeoCustomDimension extends Struct.ComponentSchema {
+  collectionName: 'components_seo_custom_dimension';
+  info: {
+    description: 'Custom dimension for GA4';
+    displayName: 'Custom Dimension';
+  };
+  attributes: {
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    scope: Schema.Attribute.Enumeration<['event', 'user', 'session', 'page']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'page'>;
+    value: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -177,6 +252,7 @@ export interface SeoSeoMetadata extends Struct.ComponentSchema {
   };
   attributes: {
     advancedRobots: Schema.Attribute.String;
+    analytics: Schema.Attribute.Component<'seo.analytics', false>;
     articleAuthor: Schema.Attribute.Relation<
       'oneToOne',
       'api::staff-member.staff-member'
@@ -189,6 +265,7 @@ export interface SeoSeoMetadata extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<false>;
     focusKeyword: Schema.Attribute.String;
     hreflangLinks: Schema.Attribute.Component<'seo.hreflang', true>;
+    legalService: Schema.Attribute.Component<'seo.legal-service', true>;
     localBusiness: Schema.Attribute.Component<'seo.local-business', false>;
     metaDescription: Schema.Attribute.Text &
       Schema.Attribute.Required &
@@ -230,6 +307,7 @@ export interface SeoSeoMetadata extends Struct.ComponentSchema {
     pageSpeedOptimizations: Schema.Attribute.Component<'seo.page-speed', false>;
     preventIndexing: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
+    schemaMarkup: Schema.Attribute.Text;
     structuredData: Schema.Attribute.JSON;
     twitterCard: Schema.Attribute.Enumeration<
       ['summary', 'summary_large_image', 'app', 'player']
@@ -308,7 +386,10 @@ export interface StaffSocialMedia extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'seo.analytics': SeoAnalytics;
       'seo.breadcrumb': SeoBreadcrumb;
+      'seo.conversion-event': SeoConversionEvent;
+      'seo.custom-dimension': SeoCustomDimension;
       'seo.hreflang': SeoHreflang;
       'seo.legal-service': SeoLegalService;
       'seo.local-business': SeoLocalBusiness;
