@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "practice_areas",
+  "info": {
+    "singularName": "practice-area",
+    "pluralName": "practice-areas",
+    "displayName": "Practice Area",
+    "description": "Create and manage practice areas highlighted on the homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "maxLength": 250
+    },
+    "icon": {
+      "type": "string",
+      "required": true,
+      "description": "Emoji or icon code for the practice area"
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 1,
+      "min": 1,
+      "description": "Display order of the practice area"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show this practice area on the homepage"
+    }
+  }
+}

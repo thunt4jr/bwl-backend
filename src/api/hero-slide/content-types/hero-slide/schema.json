@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hero_slides",
+  "info": {
+    "singularName": "hero-slide",
+    "pluralName": "hero-slides",
+    "displayName": "Hero Slide",
+    "description": "Create and manage hero carousel slides for the homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "maxLength": 300
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "ctaText": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "ctaLink": {
+      "type": "string",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 1,
+      "min": 1,
+      "description": "Display order of the slide"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether to show this slide in the carousel"
+    }
+  }
+}
