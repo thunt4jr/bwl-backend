@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_seo_service_offer",
+  "info": {
+    "displayName": "Service Offer",
+    "description": "Schema.org Offer for specific service packages"
+  },
+  "options": {},
+  "attributes": {
+    "offerName": {
+      "type": "string",
+      "required": true,
+      "description": "Name of the specific service offer"
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "price": {
+      "type": "decimal",
+      "description": "Cost of the service (if fixed price)"
+    },
+    "priceCurrency": {
+      "type": "string",
+      "default": "USD"
+    },
+    "priceSpecification": {
+      "type": "text",
+      "description": "Explanation of pricing model (e.g., hourly rate, flat fee, contingency)"
+    },
+    "url": {
+      "type": "string",
+      "description": "URL to more information about this offer"
+    },
+    "validFrom": {
+      "type": "datetime",
+      "description": "When this offer becomes valid"
+    },
+    "validThrough": {
+      "type": "datetime",
+      "description": "When this offer expires"
+    }
+  }
+}

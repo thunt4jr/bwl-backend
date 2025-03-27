@@ -1,20 +1,210 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SeoBreadcrumb extends Struct.ComponentSchema {
+  collectionName: 'components_seo_breadcrumb';
+  info: {
+    description: 'Define breadcrumb navigation links';
+    displayName: 'Breadcrumb';
+  };
+  attributes: {
+    position: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SeoHreflang extends Struct.ComponentSchema {
+  collectionName: 'components_seo_hreflang';
+  info: {
+    description: 'Alternate language version links';
+    displayName: 'Hreflang';
+  };
+  attributes: {
+    language: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SeoLegalService extends Struct.ComponentSchema {
+  collectionName: 'components_seo_legal_service';
+  info: {
+    description: 'Schema.org LegalService specific properties';
+    displayName: 'Legal Service Schema';
+  };
+  attributes: {
+    areaServed: Schema.Attribute.Text;
+    audience: Schema.Attribute.Text;
+    availableLanguage: Schema.Attribute.Text;
+    hasOfferCatalog: Schema.Attribute.Component<'seo.service-offer', true>;
+    provider: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::staff-member.staff-member'
+    >;
+    serviceDescription: Schema.Attribute.Text & Schema.Attribute.Required;
+    serviceName: Schema.Attribute.String & Schema.Attribute.Required;
+    serviceOutput: Schema.Attribute.Text;
+    serviceType: Schema.Attribute.Enumeration<
+      [
+        'FamilyLaw',
+        'CriminalLaw',
+        'DivorceLaw',
+        'BusinessLaw',
+        'ImmigrationLaw',
+        'PersonalInjuryLaw',
+        'EstateAndTrustLaw',
+        'RealEstateLaw',
+        'BankruptcyLaw',
+        'IntellectualPropertyLaw',
+        'TaxLaw',
+        'OtherLegalService',
+      ]
+    > &
+      Schema.Attribute.Required;
+    termsOfService: Schema.Attribute.String;
+  };
+}
+
+export interface SeoLocalBusiness extends Struct.ComponentSchema {
+  collectionName: 'components_seo_local_business';
+  info: {
+    description: 'Schema.org LocalBusiness data for local SEO';
+    displayName: 'Local Business Schema';
+  };
+  attributes: {
+    addressCountry: Schema.Attribute.String & Schema.Attribute.DefaultTo<'US'>;
+    addressLocality: Schema.Attribute.String;
+    addressRegion: Schema.Attribute.String;
+    areaServed: Schema.Attribute.Text;
+    businessName: Schema.Attribute.String;
+    businessType: Schema.Attribute.Enumeration<
+      [
+        'LegalService',
+        'Attorney',
+        'Lawyer',
+        'Organization',
+        'LocalBusiness',
+        'ProfessionalService',
+      ]
+    > &
+      Schema.Attribute.DefaultTo<'LegalService'>;
+    email: Schema.Attribute.Email;
+    image: Schema.Attribute.Media<'images'>;
+    latitude: Schema.Attribute.Decimal;
+    logo: Schema.Attribute.Media<'images'>;
+    longitude: Schema.Attribute.Decimal;
+    openingHours: Schema.Attribute.Component<'seo.opening-hours', true>;
+    paymentAccepted: Schema.Attribute.Text;
+    postalCode: Schema.Attribute.String;
+    priceRange: Schema.Attribute.String;
+    sameAs: Schema.Attribute.Text;
+    streetAddress: Schema.Attribute.String;
+    telephone: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface SeoOpeningHours extends Struct.ComponentSchema {
+  collectionName: 'components_seo_opening_hours';
+  info: {
+    description: 'Business hours specification for LocalBusiness schema';
+    displayName: 'Opening Hours';
+  };
+  attributes: {
+    closes: Schema.Attribute.String;
+    dayOfWeek: Schema.Attribute.Enumeration<
+      [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ]
+    > &
+      Schema.Attribute.Required;
+    isClosed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    opens: Schema.Attribute.String;
+  };
+}
+
+export interface SeoPageSpeed extends Struct.ComponentSchema {
+  collectionName: 'components_seo_page_speed';
+  info: {
+    description: 'Settings for page speed and Core Web Vitals';
+    displayName: 'Page Speed Optimizations';
+  };
+  attributes: {
+    deferNonCriticalCSS: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+    deferNonCriticalJS: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+    lazyLoadImages: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    preconnect: Schema.Attribute.Text;
+    preload: Schema.Attribute.Component<'seo.preload-resource', true>;
+    priority: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
+export interface SeoPreloadResource extends Struct.ComponentSchema {
+  collectionName: 'components_seo_preload_resource';
+  info: {
+    description: 'Resource to preload for page speed';
+    displayName: 'Preload Resource';
+  };
+  attributes: {
+    mediaQuery: Schema.Attribute.String;
+    resourceType: Schema.Attribute.Enumeration<
+      ['image', 'style', 'script', 'font', 'document']
+    > &
+      Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SeoSeoMetadata extends Struct.ComponentSchema {
   collectionName: 'components_seo_seo_metadata';
   info: {
-    description: 'Manage SEO metadata for content';
+    description: 'Comprehensive SEO metadata for content';
     displayName: 'SEO Metadata';
   };
   attributes: {
+    advancedRobots: Schema.Attribute.String;
+    articleAuthor: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::staff-member.staff-member'
+    >;
+    articleModifiedDate: Schema.Attribute.DateTime;
+    articlePublishDate: Schema.Attribute.DateTime;
+    breadcrumbs: Schema.Attribute.Component<'seo.breadcrumb', true>;
     canonicalURL: Schema.Attribute.String;
+    excludeFromSitemap: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    focusKeyword: Schema.Attribute.String;
+    hreflangLinks: Schema.Attribute.Component<'seo.hreflang', true>;
+    localBusiness: Schema.Attribute.Component<'seo.local-business', false>;
     metaDescription: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 160;
       }>;
     metaKeywords: Schema.Attribute.Text;
-    metaRobots: Schema.Attribute.String &
+    metaRobots: Schema.Attribute.Enumeration<
+      [
+        'index, follow',
+        'index, nofollow',
+        'noindex, follow',
+        'noindex, nofollow',
+      ]
+    > &
+      Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'index, follow'>;
     metaTitle: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -23,7 +213,49 @@ export interface SeoSeoMetadata extends Struct.ComponentSchema {
       }>;
     metaViewport: Schema.Attribute.String &
       Schema.Attribute.DefaultTo<'width=device-width, initial-scale=1'>;
+    ogDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    ogImage: Schema.Attribute.Media<'images'>;
+    ogLocale: Schema.Attribute.String & Schema.Attribute.DefaultTo<'en_US'>;
+    ogTitle: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 70;
+      }>;
+    ogType: Schema.Attribute.Enumeration<
+      ['website', 'article', 'profile', 'book', 'business.business']
+    > &
+      Schema.Attribute.DefaultTo<'website'>;
+    pageSpeedOptimizations: Schema.Attribute.Component<'seo.page-speed', false>;
+    preventIndexing: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     structuredData: Schema.Attribute.JSON;
+    twitterCard: Schema.Attribute.Enumeration<
+      ['summary', 'summary_large_image', 'app', 'player']
+    > &
+      Schema.Attribute.DefaultTo<'summary_large_image'>;
+    twitterCreator: Schema.Attribute.String;
+    twitterImage: Schema.Attribute.Media<'images'>;
+    twitterSite: Schema.Attribute.String;
+  };
+}
+
+export interface SeoServiceOffer extends Struct.ComponentSchema {
+  collectionName: 'components_seo_service_offer';
+  info: {
+    description: 'Schema.org Offer for specific service packages';
+    displayName: 'Service Offer';
+  };
+  attributes: {
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    offerName: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.Decimal;
+    priceCurrency: Schema.Attribute.String & Schema.Attribute.DefaultTo<'USD'>;
+    priceSpecification: Schema.Attribute.Text;
+    url: Schema.Attribute.String;
+    validFrom: Schema.Attribute.DateTime;
+    validThrough: Schema.Attribute.DateTime;
   };
 }
 
@@ -76,7 +308,15 @@ export interface StaffSocialMedia extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'seo.breadcrumb': SeoBreadcrumb;
+      'seo.hreflang': SeoHreflang;
+      'seo.legal-service': SeoLegalService;
+      'seo.local-business': SeoLocalBusiness;
+      'seo.opening-hours': SeoOpeningHours;
+      'seo.page-speed': SeoPageSpeed;
+      'seo.preload-resource': SeoPreloadResource;
       'seo.seo-metadata': SeoSeoMetadata;
+      'seo.service-offer': SeoServiceOffer;
       'staff.education': StaffEducation;
       'staff.experience': StaffExperience;
       'staff.social-media': StaffSocialMedia;

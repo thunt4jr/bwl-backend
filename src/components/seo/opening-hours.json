@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_seo_opening_hours",
+  "info": {
+    "displayName": "Opening Hours",
+    "description": "Business hours specification for LocalBusiness schema"
+  },
+  "options": {},
+  "attributes": {
+    "dayOfWeek": {
+      "type": "enumeration",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "required": true
+    },
+    "opens": {
+      "type": "string",
+      "description": "Opening time in 24-hour format (e.g., 09:00)",
+      "regex": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "closes": {
+      "type": "string",
+      "description": "Closing time in 24-hour format (e.g., 17:00)",
+      "regex": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+    },
+    "isClosed": {
+      "type": "boolean",
+      "default": false,
+      "description": "Check if closed on this day"
+    }
+  }
+}

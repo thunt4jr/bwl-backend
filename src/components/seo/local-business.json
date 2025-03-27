@@ -1,0 +1,94 @@
+{
+  "collectionName": "components_seo_local_business",
+  "info": {
+    "displayName": "Local Business Schema",
+    "description": "Schema.org LocalBusiness data for local SEO"
+  },
+  "options": {},
+  "attributes": {
+    "businessName": {
+      "type": "string",
+      "description": "Full legal name of the business"
+    },
+    "businessType": {
+      "type": "enumeration",
+      "enum": [
+        "LegalService",
+        "Attorney",
+        "Lawyer",
+        "Organization",
+        "LocalBusiness",
+        "ProfessionalService"
+      ],
+      "default": "LegalService"
+    },
+    "streetAddress": {
+      "type": "string"
+    },
+    "addressLocality": {
+      "type": "string",
+      "description": "City name"
+    },
+    "addressRegion": {
+      "type": "string",
+      "description": "State/Province"
+    },
+    "postalCode": {
+      "type": "string"
+    },
+    "addressCountry": {
+      "type": "string",
+      "default": "US"
+    },
+    "telephone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "url": {
+      "type": "string",
+      "description": "Business website URL"
+    },
+    "priceRange": {
+      "type": "string",
+      "description": "Price range (e.g., $$, $$$)"
+    },
+    "latitude": {
+      "type": "decimal"
+    },
+    "longitude": {
+      "type": "decimal"
+    },
+    "openingHours": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo.opening-hours"
+    },
+    "sameAs": {
+      "type": "text",
+      "description": "List of social media URLs, one per line (for sameAs property)"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"],
+      "description": "Photo of business location"
+    },
+    "paymentAccepted": {
+      "type": "text",
+      "description": "List of payment methods accepted, comma separated"
+    },
+    "areaServed": {
+      "type": "text",
+      "description": "Geographic areas served (e.g., Miami-Dade County, Broward County)"
+    }
+  }
+}

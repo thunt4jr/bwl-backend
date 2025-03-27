@@ -1,0 +1,69 @@
+{
+  "collectionName": "components_seo_legal_service",
+  "info": {
+    "displayName": "Legal Service Schema",
+    "description": "Schema.org LegalService specific properties"
+  },
+  "options": {},
+  "attributes": {
+    "serviceName": {
+      "type": "string",
+      "required": true,
+      "description": "Name of the legal service (e.g., Divorce Representation)"
+    },
+    "serviceType": {
+      "type": "enumeration",
+      "enum": [
+        "FamilyLaw",
+        "CriminalLaw",
+        "DivorceLaw",
+        "BusinessLaw",
+        "ImmigrationLaw",
+        "PersonalInjuryLaw",
+        "EstateAndTrustLaw",
+        "RealEstateLaw",
+        "BankruptcyLaw",
+        "IntellectualPropertyLaw",
+        "TaxLaw",
+        "OtherLegalService"
+      ],
+      "required": true
+    },
+    "serviceDescription": {
+      "type": "text",
+      "required": true
+    },
+    "provider": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::staff-member.staff-member",
+      "description": "The attorney who provides this service"
+    },
+    "audience": {
+      "type": "text",
+      "description": "Target audience for this service (e.g., Individuals, Small Businesses)"
+    },
+    "availableLanguage": {
+      "type": "text",
+      "description": "Languages this service is available in (comma-separated)"
+    },
+    "hasOfferCatalog": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo.service-offer",
+      "description": "Specific offerings within this service"
+    },
+    "termsOfService": {
+      "type": "string",
+      "description": "URL to terms of service document"
+    },
+    "serviceOutput": {
+      "type": "text",
+      "description": "Expected outcome of the service (e.g., Legal Representation, Divorce Settlement)"
+    },
+    "areaServed": {
+      "type": "text",
+      "description": "Geographic areas where this service is offered"
+    }
+  }
+}

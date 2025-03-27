@@ -1,0 +1,67 @@
+{
+  "collectionName": "components_seo_analytics",
+  "info": {
+    "displayName": "Analytics Integration",
+    "description": "Web analytics and tracking configurations"
+  },
+  "options": {},
+  "attributes": {
+    "googleAnalyticsID": {
+      "type": "string",
+      "description": "Google Analytics 4 Measurement ID (G-XXXXXXXX)"
+    },
+    "googleTagManagerID": {
+      "type": "string",
+      "description": "Google Tag Manager ID (GTM-XXXXXXX)"
+    },
+    "useGTM": {
+      "type": "boolean",
+      "default": false,
+      "description": "Use Google Tag Manager instead of direct GA4 implementation"
+    },
+    "enableEnhancedMeasurement": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable enhanced measurement features in GA4"
+    },
+    "enableDemographics": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable demographics and interest reports"
+    },
+    "excludeFromAnalytics": {
+      "type": "boolean",
+      "default": false,
+      "description": "Exclude this page from analytics tracking"
+    },
+    "customDimensions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo.custom-dimension",
+      "description": "Custom dimensions for GA4"
+    },
+    "conversionTracking": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo.conversion-event",
+      "description": "Conversion events to track"
+    },
+    "facebookPixelID": {
+      "type": "string",
+      "description": "Facebook Pixel ID"
+    },
+    "linkedInInsightTag": {
+      "type": "string",
+      "description": "LinkedIn Insight Tag ID"
+    },
+    "microsoftClarityID": {
+      "type": "string",
+      "description": "Microsoft Clarity tracking ID"
+    },
+    "cookieConsentRequired": {
+      "type": "boolean",
+      "default": true,
+      "description": "Require cookie consent before enabling analytics"
+    }
+  }
+}

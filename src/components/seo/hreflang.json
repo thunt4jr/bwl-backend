@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_seo_hreflang",
+  "info": {
+    "displayName": "Hreflang",
+    "description": "Alternate language version links"
+  },
+  "options": {},
+  "attributes": {
+    "language": {
+      "type": "string",
+      "required": true,
+      "description": "Language code (e.g., en-US, es-ES)"
+    },
+    "url": {
+      "type": "string",
+      "required": true,
+      "description": "Full URL to the alternate language version"
+    }
+  }
+}

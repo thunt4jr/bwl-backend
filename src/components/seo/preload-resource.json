@@ -1,0 +1,24 @@
+
+{
+  "collectionName": "components_seo_preload_resource",
+  "info": {
+    "displayName": "Preload Resource",
+    "description": "Resource to preload for page speed"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "resourceType": {
+      "type": "enumeration",
+      "enum": ["image", "style", "script", "font", "document"],
+      "required": true
+    },
+    "mediaQuery": {
+      "type": "string",
+      "description": "Optional media query (e.g., (max-width: 600px))"
+    }
+  }
+}

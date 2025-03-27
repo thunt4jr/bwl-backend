@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_seo_page_speed",
+  "info": {
+    "displayName": "Page Speed Optimizations",
+    "description": "Settings for page speed and Core Web Vitals"
+  },
+  "options": {},
+  "attributes": {
+    "lazyLoadImages": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable lazy loading for images"
+    },
+    "priority": {
+      "type": "boolean",
+      "default": false,
+      "description": "Set important images as priority (for LCP)"
+    },
+    "preconnect": {
+      "type": "text",
+      "description": "List of domains to preconnect (one URL per line)"
+    },
+    "preload": {
+      "type": "component",
+      "repeatable": true,
+      "component": "seo.preload-resource"
+    },
+    "deferNonCriticalCSS": {
+      "type": "boolean",
+      "default": true
+    },
+    "deferNonCriticalJS": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

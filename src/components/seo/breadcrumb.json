@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_seo_breadcrumb",
+  "info": {
+    "displayName": "Breadcrumb",
+    "description": "Define breadcrumb navigation links"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "position": {
+      "type": "integer",
+      "required": true,
+      "min": 1
+    }
+  }
+}

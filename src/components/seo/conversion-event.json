@@ -1,0 +1,46 @@
+{
+  "collectionName": "components_seo_conversion_event",
+  "info": {
+    "displayName": "Conversion Event",
+    "description": "Track specific conversion events"
+  },
+  "options": {},
+  "attributes": {
+    "eventName": {
+      "type": "string",
+      "required": true,
+      "description": "Name of the conversion event"
+    },
+    "eventCategory": {
+      "type": "enumeration",
+      "enum": [
+        "contact",
+        "consultation",
+        "download",
+        "signup",
+        "call",
+        "video",
+        "custom"
+      ],
+      "required": true
+    },
+    "selector": {
+      "type": "string",
+      "description": "CSS selector for the element to track (if applicable)"
+    },
+    "eventValue": {
+      "type": "decimal",
+      "description": "Monetary value of this conversion (if applicable)"
+    },
+    "customEventProperties": {
+      "type": "json",
+      "description": "Additional properties to send with this event"
+    },
+    "triggerOn": {
+      "type": "enumeration",
+      "enum": ["click", "submit", "scroll", "view", "timer"],
+      "default": "click",
+      "required": true
+    }
+  }
+}
