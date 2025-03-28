@@ -1,5 +1,28 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SeoAiSeoOptimization extends Struct.ComponentSchema {
+  collectionName: 'components_seo_ai_optimization';
+  info: {
+    description: 'AI-powered SEO optimization settings';
+    displayName: 'AI SEO Optimization';
+  };
+  attributes: {
+    enableAiOptimization: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+    geographicFocus: Schema.Attribute.String;
+    lastOptimizationRun: Schema.Attribute.DateTime;
+    optimizationScore: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      >;
+    targetKeywords: Schema.Attribute.Text;
+  };
+}
+
 export interface SeoAnalytics extends Struct.ComponentSchema {
   collectionName: 'components_seo_analytics';
   info: {
@@ -92,6 +115,19 @@ export interface SeoCustomDimension extends Struct.ComponentSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'page'>;
     value: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface SeoGoogleBusiness extends Struct.ComponentSchema {
+  collectionName: 'components_seo_google_business';
+  info: {
+    description: 'Google Business Profile integration settings';
+    displayName: 'Google Business Profile';
+  };
+  attributes: {
+    locationName: Schema.Attribute.String;
+    profileID: Schema.Attribute.String;
+    reviewLink: Schema.Attribute.String;
   };
 }
 
@@ -252,21 +288,20 @@ export interface SeoSeoMetadata extends Struct.ComponentSchema {
   };
   attributes: {
     advancedRobots: Schema.Attribute.String;
-    analytics: Schema.Attribute.Component<'seo.analytics', false>;
-    articleAuthor: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::staff-member.staff-member'
+    aiOptimization: Schema.Attribute.Component<
+      'seo.ai-seo-optimization',
+      false
     >;
     articleModifiedDate: Schema.Attribute.DateTime;
     articlePublishDate: Schema.Attribute.DateTime;
-    breadcrumbs: Schema.Attribute.Component<'seo.breadcrumb', true>;
     canonicalURL: Schema.Attribute.String;
     excludeFromSitemap: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     focusKeyword: Schema.Attribute.String;
-    hreflangLinks: Schema.Attribute.Component<'seo.hreflang', true>;
-    legalService: Schema.Attribute.Component<'seo.legal-service', true>;
-    localBusiness: Schema.Attribute.Component<'seo.local-business', false>;
+    googleBusinessProfile: Schema.Attribute.Component<
+      'seo.google-business',
+      false
+    >;
     metaDescription: Schema.Attribute.Text &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -304,10 +339,10 @@ export interface SeoSeoMetadata extends Struct.ComponentSchema {
       ['website', 'article', 'profile', 'book', 'business.business']
     > &
       Schema.Attribute.DefaultTo<'website'>;
-    pageSpeedOptimizations: Schema.Attribute.Component<'seo.page-speed', false>;
     preventIndexing: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     schemaMarkup: Schema.Attribute.Text;
+    socialMediaSharing: Schema.Attribute.Component<'seo.social-sharing', false>;
     structuredData: Schema.Attribute.JSON;
     twitterCard: Schema.Attribute.Enumeration<
       ['summary', 'summary_large_image', 'app', 'player']
@@ -334,6 +369,20 @@ export interface SeoServiceOffer extends Struct.ComponentSchema {
     url: Schema.Attribute.String;
     validFrom: Schema.Attribute.DateTime;
     validThrough: Schema.Attribute.DateTime;
+  };
+}
+
+export interface SeoSocialSharing extends Struct.ComponentSchema {
+  collectionName: 'components_seo_social_sharing';
+  info: {
+    description: 'Settings for social media sharing and integration';
+    displayName: 'Social Media Sharing';
+  };
+  attributes: {
+    customShareText: Schema.Attribute.Text;
+    enableAutoPosting: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    hashTags: Schema.Attribute.String;
   };
 }
 
@@ -386,10 +435,12 @@ export interface StaffSocialMedia extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'seo.ai-seo-optimization': SeoAiSeoOptimization;
       'seo.analytics': SeoAnalytics;
       'seo.breadcrumb': SeoBreadcrumb;
       'seo.conversion-event': SeoConversionEvent;
       'seo.custom-dimension': SeoCustomDimension;
+      'seo.google-business': SeoGoogleBusiness;
       'seo.hreflang': SeoHreflang;
       'seo.legal-service': SeoLegalService;
       'seo.local-business': SeoLocalBusiness;
@@ -398,6 +449,7 @@ declare module '@strapi/strapi' {
       'seo.preload-resource': SeoPreloadResource;
       'seo.seo-metadata': SeoSeoMetadata;
       'seo.service-offer': SeoServiceOffer;
+      'seo.social-sharing': SeoSocialSharing;
       'staff.education': StaffEducation;
       'staff.experience': StaffExperience;
       'staff.social-media': StaffSocialMedia;

@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_seo_social_sharing",
+  "info": {
+    "displayName": "Social Media Sharing",
+    "description": "Settings for social media sharing and integration"
+  },
+  "options": {},
+  "attributes": {
+    "enableAutoPosting": {
+      "type": "boolean",
+      "default": false,
+      "description": "Automatically share content to social media platforms"
+    },
+    "customShareText": {
+      "type": "text",
+      "description": "Template for social media post text (variables: {title}, {excerpt}, {url})"
+    },
+    "hashTags": {
+      "type": "string",
+      "description": "Default hashtags for social posts (comma separated)"
+    }
+  }
+}

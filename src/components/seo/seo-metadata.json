@@ -51,17 +51,6 @@
       "type": "json",
       "description": "JSON-LD structured data for rich snippets (Schema.org)"
     },
-    "localBusiness": {
-      "type": "component",
-      "repeatable": false,
-      "component": "seo.local-business"
-    },
-    "legalService": {
-      "type": "component",
-      "repeatable": true,
-      "component": "seo.legal-service",
-      "description": "Legal service schema details"
-    },
 
     "ogTitle": {
       "type": "string",
@@ -123,26 +112,6 @@
       "description": "Check to exclude this page from the sitemap"
     },
 
-    "breadcrumbs": {
-      "type": "component",
-      "repeatable": true,
-      "component": "seo.breadcrumb",
-      "description": "Define custom breadcrumb path"
-    },
-
-    "pageSpeedOptimizations": {
-      "type": "component",
-      "repeatable": false,
-      "component": "seo.page-speed"
-    },
-
-    "hreflangLinks": {
-      "type": "component",
-      "repeatable": true,
-      "component": "seo.hreflang",
-      "description": "Alternate language versions of this page"
-    },
-
     "articlePublishDate": {
       "type": "datetime",
       "description": "Publication date for article schema"
@@ -151,17 +120,26 @@
       "type": "datetime",
       "description": "Last modified date for article schema"
     },
-    "articleAuthor": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::staff-member.staff-member"
-    },
 
-    "analytics": {
+    "googleBusinessProfile": {
       "type": "component",
       "repeatable": false,
-      "component": "seo.analytics",
-      "description": "Analytics and tracking configurations"
+      "component": "seo.google-business",
+      "description": "Google Business Profile integration"
+    },
+
+    "socialMediaSharing": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.social-sharing",
+      "description": "Social media sharing settings"
+    },
+
+    "aiOptimization": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.ai-seo-optimization",
+      "description": "AI-powered SEO optimization settings"
     },
 
     "schemaMarkup": {
