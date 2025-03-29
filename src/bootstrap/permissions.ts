@@ -50,7 +50,7 @@ export default async ({ strapi }) => {
       if (!existingPermission) {
         permissionsToCreate.push({
           action: actionString,
-          role: publicRole,
+          role: publicRole.id,
           enabled: true,
         });
       }
