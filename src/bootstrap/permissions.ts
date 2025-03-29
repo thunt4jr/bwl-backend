@@ -10,6 +10,13 @@ export default async ({ strapi }) => {
     return;
   }
 
+  const allPermissions = await strapi
+    .query("plugin::users-permissions.permission")
+    .findMany();
+
+  console.log("Existing permissions:");
+  console.log(allPermissions.map((p) => p.action));
+
   // List of content types to make public
   const contentTypes = [
     "api::practice-area.practice-area",
