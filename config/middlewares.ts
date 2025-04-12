@@ -9,7 +9,6 @@ export default [
       frameguard: false,
     },
   },
-  "global::security-headers",
   {
     name: "strapi::cors",
     config: {
