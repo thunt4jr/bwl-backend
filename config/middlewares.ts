@@ -25,7 +25,7 @@ export default [
   "strapi::favicon",
   "strapi::public",
   {
-    name: "global::security-headers",
+    name: "api::middlewares.security-headers",
     config: {},
   },
 ];
