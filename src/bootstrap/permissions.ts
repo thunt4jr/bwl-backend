@@ -1,74 +1,103 @@
-// src/bootstrap/permissions.js
+// src/bootstrap/permissions.ts
 export default async ({ strapi }) => {
-  // Find the public role in the users-permissions plugin
-  const publicRole = await strapi
-    .query("plugin::users-permissions.role")
-    .findOne({ where: { type: "public" } });
+  try {
+    // Find the public role in the users-permissions plugin
+    const publicRole = await strapi
+      .query("plugin::users-permissions.role")
+      .findOne({ where: { type: "public" } });
 
-  if (!publicRole) {
-    console.error("Could not find public role");
-    return;
-  }
+    if (!publicRole) {
+      console.error("Could not find public role");
+      return;
+    }
 
-  const allPermissions = await strapi
-    .query("plugin::users-permissions.permission")
-    .findMany();
+    // List of content types to make public
+    const contentTypes = [
+      "api::practice-area.practice-area",
+      "api::blog-post.blog-post",
+      "api::hero-slide.hero-slide",
+      "api::staff-member.staff-member",
+      "api::category.category",
+    ];
 
-  console.log("Existing permissions:");
-  console.log(allPermissions.map((p) => p.action));
+    // Actions to enable for public role
+    const actions = ["find", "findOne"];
 
-  // List of content types to make public
-  const contentTypes = [
-    "api::practice-area.practice-area",
-    "api::blog-post.blog-post",
-    "api::hero-slide.hero-slide",
-    "api::staff-member.staff-member",
-    "api::category.category",
-  ];
+    // Prepare permission objects for batch creation
+    const permissionsToCreate = [];
 
-  // Actions to enable for public role
-  const actions = ["find", "findOne"];
+    for (const contentType of contentTypes) {
+      for (const action of actions) {
+        // Build the action string as it appears in the users-permissions plugin
+        const actionString = `${contentType}.${action}`;
 
-  // Prepare permission objects for batch creation
-  const permissionsToCreate = [];
+        // Check if permission already exists
+        const existingPermission = await strapi
+          .query("plugin::users-permissions.permission")
+          .findOne({
+            where: {
+              action: actionString,
+              role: publicRole.id,
+            },
+          });
 
-  for (const contentType of contentTypes) {
-    for (const action of actions) {
-      // Build the action string as it appears in the users-permissions plugin
-      const actionString = `${contentType}.${action}`;
+        if (!existingPermission) {
+          permissionsToCreate.push({
+            action: actionString,
+            role: publicRole.id,
+            enabled: true,
+          });
+        }
+      }
+    }
 
-      // Check if permission already exists
+    // Add custom routes permissions
+    const customRoutesPermissions = [
+      "api::staff-member.staff-member.findBySlug",
+      "api::staff-member.staff-member.findAttorneys",
+      "api::blog-post.blog-post.findRelated",
+      "api::blog-post.blog-post.findByCategory",
+      "api::category.category.findBySlug",
+      "api::practice-area.practice-area.findForHomepage",
+      "api::consultation-request.consultation-request.create",
+      "api::contact.contact.create",
+    ];
+
+    for (const permission of customRoutesPermissions) {
       const existingPermission = await strapi
         .query("plugin::users-permissions.permission")
         .findOne({
           where: {
-            action: actionString,
+            action: permission,
             role: publicRole.id,
           },
         });
 
       if (!existingPermission) {
         permissionsToCreate.push({
-          action: actionString,
+          action: permission,
           role: publicRole.id,
           enabled: true,
         });
       }
     }
+
+    // Create all missing permissions
+    if (permissionsToCreate.length > 0) {
+      // Use createMany for better performance with multiple permissions
+      await strapi.query("plugin::users-permissions.permission").createMany({
+        data: permissionsToCreate,
+      });
+
+      console.log(
+        `Created ${permissionsToCreate.length} permissions for public role`
+      );
+    } else {
+      console.log("No new permissions needed to be created");
+    }
+
+    console.log("Public API permissions set up successfully");
+  } catch (error) {
+    console.error("Error setting up permissions:", error);
   }
-
-  // Create all missing permissions
-  if (permissionsToCreate.length > 0) {
-    await strapi.query("plugin::users-permissions.permission").createMany({
-      data: permissionsToCreate,
-    });
-
-    console.log(
-      `Created ${permissionsToCreate.length} permissions for public role`
-    );
-  } else {
-    console.log("No new permissions needed to be created");
-  }
-
-  console.log("Public API permissions set up successfully");
 };
