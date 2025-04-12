@@ -1,11 +1,7 @@
-// src/index.ts
-import permissions from "./bootstrap/permissions";
-
+// src/index.ts (simplified)
 export default {
   register(/* { strapi } */) {},
-
   bootstrap({ strapi }) {
-    // Run the permissions bootstrap on startup
-    permissions({ strapi });
+    console.log("Using direct DB script for permissions instead of bootstrap");
   },
 };

@@ -135,13 +135,6 @@
       "description": "Social media sharing settings"
     },
 
-    "aiOptimization": {
-      "type": "component",
-      "repeatable": false,
-      "component": "seo.ai-seo-optimization",
-      "description": "AI-powered SEO optimization settings"
-    },
-
     "schemaMarkup": {
       "type": "text",
       "description": "Advanced custom schema.org JSON-LD markup (use with caution)"

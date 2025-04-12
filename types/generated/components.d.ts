@@ -1,28 +1,5 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface SeoAiSeoOptimization extends Struct.ComponentSchema {
-  collectionName: 'components_seo_ai_optimization';
-  info: {
-    description: 'AI-powered SEO optimization settings';
-    displayName: 'AI SEO Optimization';
-  };
-  attributes: {
-    enableAiOptimization: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<true>;
-    geographicFocus: Schema.Attribute.String;
-    lastOptimizationRun: Schema.Attribute.DateTime;
-    optimizationScore: Schema.Attribute.Integer &
-      Schema.Attribute.SetMinMax<
-        {
-          max: 100;
-          min: 0;
-        },
-        number
-      >;
-    targetKeywords: Schema.Attribute.Text;
-  };
-}
-
 export interface SeoAnalytics extends Struct.ComponentSchema {
   collectionName: 'components_seo_analytics';
   info: {
@@ -288,10 +265,6 @@ export interface SeoSeoMetadata extends Struct.ComponentSchema {
   };
   attributes: {
     advancedRobots: Schema.Attribute.String;
-    aiOptimization: Schema.Attribute.Component<
-      'seo.ai-seo-optimization',
-      false
-    >;
     articleModifiedDate: Schema.Attribute.DateTime;
     articlePublishDate: Schema.Attribute.DateTime;
     canonicalURL: Schema.Attribute.String;
@@ -435,7 +408,6 @@ export interface StaffSocialMedia extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'seo.ai-seo-optimization': SeoAiSeoOptimization;
       'seo.analytics': SeoAnalytics;
       'seo.breadcrumb': SeoBreadcrumb;
       'seo.conversion-event': SeoConversionEvent;
