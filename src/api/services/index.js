@@ -1,6 +1,6 @@
 "use strict";
 
-const permission = require("./permission");
+const permission = require("src/api/services/permission");
 
 module.exports = {
   permission,

@@ -4,28 +4,12 @@ export default [
   {
     name: "strapi::security",
     config: {
-      contentSecurityPolicy: {
-        useDefaults: true,
-        directives: {
-          "default-src": ["'self'"],
-          "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-          "style-src": ["'self'", "'unsafe-inline'"],
-          "img-src": ["'self'", "data:", "blob:"],
-          "font-src": ["'self'"],
-          "connect-src": ["'self'"],
-          "media-src": ["'self'"],
-          "object-src": ["'none'"],
-          "frame-src": ["'self'"],
-          "base-uri": ["'self'"],
-          "form-action": ["'self'"],
-        },
-      },
-      xssFilter: true,
-      frameguard: {
-        action: "sameorigin",
-      },
+      contentSecurityPolicy: false,
+      xssFilter: false,
+      frameguard: false,
     },
   },
+  "global::security-headers",
   {
     name: "strapi::cors",
     config: {
