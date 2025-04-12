@@ -1,8 +1,4 @@
-"use strict";
-
-/**
- * Security headers middleware to enhance the security of the application
- */
+// src/api/middlewares/security-headers.ts (or .js if you're not using TypeScript)
 
 module.exports = (config, { strapi }) => {
   return async (ctx, next) => {
