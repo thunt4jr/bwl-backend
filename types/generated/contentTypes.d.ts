@@ -465,7 +465,7 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiConsulttationRequestConsultationRequest
+export interface ApiConsultationRequestConsultationRequest
   extends Struct.CollectionTypeSchema {
   collectionName: 'consultation_requests';
   info: {
@@ -496,7 +496,7 @@ export interface ApiConsulttationRequestConsultationRequest
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::consulttation-request.consultation-request'
+      'api::consultation-request.consultation-request'
     > &
       Schema.Attribute.Private;
     notes: Schema.Attribute.RichText;
@@ -1223,7 +1223,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
       'api::category.category': ApiCategoryCategory;
-      'api::consulttation-request.consultation-request': ApiConsulttationRequestConsultationRequest;
+      'api::consultation-request.consultation-request': ApiConsultationRequestConsultationRequest;
       'api::contact.contact': ApiContactContact;
       'api::hero-slide.hero-slide': ApiHeroSlideHeroSlide;
       'api::practice-area.practice-area': ApiPracticeAreaPracticeArea;
