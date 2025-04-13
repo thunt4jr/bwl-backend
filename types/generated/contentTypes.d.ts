@@ -415,7 +415,7 @@ export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
       > &
       Schema.Attribute.DefaultTo<5>;
     seo: Schema.Attribute.Component<'seo.seo-metadata', false>;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
+    slug: Schema.Attribute.UID & Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &

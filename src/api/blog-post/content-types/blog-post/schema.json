@@ -20,7 +20,6 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "title",
       "required": true
     },
     "excerpt": {
@@ -36,7 +35,9 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "categories": {
       "type": "relation",
